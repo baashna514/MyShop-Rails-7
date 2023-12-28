@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="app">
+
+  <%= render 'admin/header' %>
+
+  <div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+      <div class="container-xl">
+        <h1 class="app-page-title"><%= @is_edit?'Edit':'Add' %> Product</h1>
+        <hr class="mb-4">
+        <div class="row g-4 mb-4">
+          <% flash.each do |type, message| %>
+            <div class="alert <%= flash_class(type) %>">
+              <%= message %>
+            </div>
+          <% end %>
+          <% if @product.errors.any? %>
+            <div class="alert-error py-3">
+              <ul>
+                <% @product.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        <div class="row g-4 settings-section">
+          <div class="col-12 col-md-12">
+            <div class="app-card app-card-settings shadow-sm p-4">
+              <div class="app-card-body">
+                <%= form_with(model: @product, url: @is_edit ? admin_update_product_path(@product) : admin_create_product_path, method: @is_edit ? :patch : :post, local: true, class:'settings-form') do |form| %>
+                  <div class="mb-3">
+                    <label for="setting-input-1" class="form-label">Name</label>
+                    <%= form.text_field :p_name, class: 'form-control', placeholder: 'Enter product name' %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="setting-input-2" class="form-label">Price</label>
+                    <%= form.text_field :p_price, class: 'form-control', placeholder: 'Enter product price' %>
+                  </div>
+                  <div class="mb-3">
+                    <label for="setting-input-3" class="form-label">Description</label>
+                    <%= form.text_area :p_desc, class: 'form-control', placeholder: 'Enter product description' %>
+                  </div>
+
+                  <div class="mb-3">
+                    <% Category.all.each do |category| %>
+                      <div class="field">
+                        <%= form.check_box :category_ids, { multiple: true }, category.id, nil %>
+                        <%= form.label "category_ids_#{category.id}", category.title %>
+                      </div>
+                    <% end %>
+                  </div>
+
+                  <% if @is_edit && @product.p_image.attached? %>
+                    <div class="mb-3">
+                      <%= image_tag @product.p_image, class: 'product-image' if @product.p_image.attached? %><br>
+                      <%= link_to 'Remove Image', admin_remove_product_image_path(@product), method: :delete, class: 'text-danger', data: { confirm: 'Are you sure?' } %>
+                    </div>
+                  <%end %>
+
+                  <div class="mb-3">
+                    <label for="setting-input-3" class="form-label">Image</label>
+                    <%= form.file_field :p_image, class: 'form-control' %>
+                  </div>
+                  <%= form.submit @is_edit?'Update Product':'Create Product', class: 'btn btn-success', style: 'width: 152px;' %>
+                <%end %>
+              </div><!--//app-card-body-->
+            </div><!--//app-card-->
+          </div>
+        </div><!--//row-->
+
+      </div><!--//container-fluid-->
+    </div><!--//app-content-->
+
+  </div><!--//app-wrapper-->
+
+</body>
+</html>

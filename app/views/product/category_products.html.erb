@@ -1,0 +1,76 @@
+<%= render 'layouts/navbar' %>
+
+<body>
+  <%= form_tag(category_products_path, method: :get) do %>
+    <section id="sidebar">
+      <p> Home | <b>Category Products</b></p>
+      <div class="border-bottom pb-2 ml-2">
+      </div>
+      <div class="py-2 border-bottom ml-3">
+        <h6 class="font-weight-bold">Categories</h6>
+        <div id="orange"><span class="fa fa-minus"></span></div>
+          <% @categories.each do |category| %>
+            <div class="form-group">
+              <%= check_box_tag "category_ids[]", category.id, params[:category_ids]&.include?(category.id.to_s) %>
+              <%= label_tag "category_#{category.id}", category.title %>
+            </div>
+          <% end %>
+      </div>
+      <%= submit_tag "Apply Filter", class: 'btn btn-sm btn-success w-100' %>
+    </section>
+  <% end %>
+  <!-- products section -->
+  <section id="products">
+    <div class="container">
+      <div class="">
+        <div class="text-muted m-2" id="res" style="float:left;">Showing <%= @product_count %> results</div>
+        <div class="ml-auto mr-lg-4" style="float:right;">
+          <div id="sorting" class="border rounded p-1 m-1">
+            <span class="text-muted">Sort by</span>
+            <select name="sort" id="sort">
+              <option value="popularity"><b>Popularity</b></option>
+              <option value="prcie"><b>Price</b></option>
+              <option value="rating"><b>Rating</b></option>
+            </select>
+          </div>
+        </div>
+        <div class="" style="clear: both;"></div>
+      </div>
+      <div class="row">
+        <% if(@products.count > 0) %>
+          <% @products.each do |product| %>
+            <div class="col-lg-3 col-sm-6 d-flex flex-column product-item my-3">
+              <div class="product">
+                <%= image_tag(rails_blob_path(product.p_image), alt: "Product") %>
+                <ul class="d-flex align-items-center justify-content-center icons">
+                  <%= form_tag(product_detail_path(product.p_name), method: :get) do %>
+                    <li class="icon mx-3" style="margin-left: 0px !important;" onclick="this.parentNode.submit();">
+                      <i class="fa fa-eye"></i>
+                    </li>
+                  <% end %>
+                  <li class="icon mx-3" title="Add to wishlist"><span class="fa fa-heart"></span></li>
+                  <%= form_tag(add_to_cart_path(product), method: :post) do %>
+                    <li class="icon mx-3" style="margin-left: 0px !important;" onclick="this.parentNode.submit();">
+                      <i class="fa fa-shopping-cart"></i>
+                    </li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="tag bg-red">
+                <%= product.categories.pluck(:title).join(' | ') %>
+              </div>
+              <div class="title pt-4 pb-1"><%= product.p_name %></div>
+              <div class="price"><%= product.p_price %> - PKR</div>
+            </div>
+          <%end %>
+        <% else %>
+          <h5 style="text-align: center;margin-top: 100px;">No product found for this category</h5>
+        <%end %>
+      </div>
+    </div>
+  </section>
+  <div class="clear" style="clear: both;">
+  </div>
+</body>
+
+<%= render 'layouts/footer' %>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f5f5f5;
+          color: #333;
+          text-align: center;
+          padding: 20px;
+      }
+
+      h1 {
+          color: #4CAF50;
+      }
+
+      .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+          font-size: 16px;
+          line-height: 1.6;
+      }
+
+      .button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 5px;
+          margin-top: 20px;
+      }
+
+      table {
+          width: 100%;
+          margin-top: 20px;
+          border-collapse: collapse;
+      }
+
+      th, td {
+          border: 1px solid #ddd;
+          padding: 12px;
+          text-align: left;
+      }
+
+      th {
+          background-color: #4CAF50;
+          color: #fff;
+      }
+
+      .product-details {
+          display: flex;
+          align-items: center;
+      }
+
+      .product-image {
+          max-width: 80px;
+          margin-right: 20px;
+          border-radius: 4px;
+      }
+
+      .product-description {
+          flex: 1;
+      }
+  </style>
+  <title>Order Confirmation</title>
+</head>
+<body>
+<div class="container">
+  <h1>Order Confirmation</h1>
+  <p>Dear <%= @order.name %>,</p>
+  <p>Thank you for your order! We are pleased to confirm that your order has been received and is now being processed.</p>
+  <p>Order Details:</p>
+  <ul>
+    <li><strong>Order ID:</strong> ORDER#<%= @order.id %></li>
+    <li><strong>Order Date:</strong> <%= @order.created_at.strftime('%B %e, %Y') %></li>
+    <!-- Add more order details here as needed -->
+  </ul>
+  <p>Order Items:</p>
+  <table>
+    <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td>
+          <div class="product-details">
+            <%= image_tag item.product.p_image, class: 'product-image' if item.product.p_image.attached? %>
+            <div class="product-description">
+              <p><strong><%= item.product.p_name %></strong></p>
+              <p><%= item.product.p_desc %></p>
+            </div>
+          </div>
+        </td>
+        <td><%= item.quantity %></td>
+        <td><%= item.price %> - PKR</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <p>We will notify you once your order has been shipped. If you have any questions or concerns, please contact our customer support.</p>
+  <a href="#" class="button">Track Your Order</a>
+  <p>Thank you for choosing our service!</p>
+</div>
+</body>
+</html>

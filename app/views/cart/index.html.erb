@@ -1,0 +1,94 @@
+<style>
+    .ui-w-40 {
+        width: 40px !important;
+        height: auto;
+    }
+
+    .card{
+        box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+    }
+</style>
+
+<%= render 'layouts/navbar' %>
+
+
+<div class="container px-3 my-5 clearfix">
+  <!-- Shopping cart table -->
+  <% flash.each do |type, message| %>
+    <div class="alert <%= flash_class(type) %>">
+      <%= message %>
+    </div>
+  <% end %>
+  <div class="card">
+    <div class="card-header">
+      <h5>Shopping Cart</h5>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered m-0">
+          <thead>
+          <tr>
+            <!-- Set columns width -->
+            <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
+            <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
+            <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
+            <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
+            <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
+          </tr>
+          </thead>
+            <% total_sum = 0 %>
+            <tbody>
+              <% @carts.each do |cart| %>
+                <% total = cart.product.p_price * cart.quantity %>
+              <% total_sum += total.to_i %>
+                <tr>
+                  <td class="p-4">
+                    <div class="media align-items-center">
+                      <%= image_tag(rails_blob_path(cart.product.p_image), alt: "Product", class: 'd-block ui-w-40 ui-bordered mr-4') %>
+                      <div class="media-body">
+                        <a href="#" class="d-block text-dark"><%= cart.product.p_name %></a>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-right font-weight-semibold align-middle p-4"><%= cart.product.p_price %></td>
+                  <td class="align-middle p-4"><input type="text" class="form-control text-center" value="<%= cart.quantity %>"></td>
+                  <td class="text-right font-weight-semibold align-middle p-4"><%= total %></td>
+                  <td class="text-center align-middle px-0">
+                    <%= link_to raw('<i class="fa fa-times"></i>'), delete_cart_path(cart), method: :delete, class: 'btn btn-sm text-danger', title: 'Remove Cart'%>
+                  </td>
+                </tr>
+              <%end %>
+          </tbody>
+        </table>
+      </div>
+      <!-- / Shopping cart table -->
+
+      <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+        <div class="mt-4">
+          <% if @carts.empty? %>
+            <p>Your cart is empty. Add items to start shopping!</p>
+          <% end %>
+        </div>
+        <div class="d-flex">
+          <div class="mt-4">
+            <label class="text-muted font-weight-normal m-0">Total price</label>
+            <div class="text-large"><strong><%= total_sum %></strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="float: right;">
+        <a href="<%= root_path %>" class="btn md-btn-flat mr-3" style="font-size: 16px;">Back to shopping</a>
+        <% if cart_counter(current_user.id) == 0 %>
+          <a href="<%= checkout_path %>" class="btn btn-xm btn-success mt-2" onclick="return false;">Checkout</a>
+        <% else %>
+          <a href="<%= checkout_path %>" class="btn btn-xm btn-success mt-2">Checkout</a>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<%= render 'layouts/footer' %>

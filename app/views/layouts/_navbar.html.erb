@@ -1,0 +1,112 @@
+ <div class="main-navbar shadow-sm sticky-top">
+    <div class="top-navbar">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
+            <h5 class="brand-name"><a href="<%= root_path %>"><%= image_tag("logo.png", alt: "MyShop Logo", style: "width: 220px;margin-top:8px;margin-left:30px;") %></a></h5>
+          </div>
+          <div class="col-md-5 my-auto">
+            <form role="search">
+              <div class="input-group">
+                <input type="search" placeholder="Search your product" class="form-control" style="padding: 0.775rem .75rem">
+                <button class="btn btn-sm bg-white" type="submit" style="width: 51px;height: 40px;">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-5 my-auto">
+            <ul class="nav justify-content-end">
+
+              <% if user_signed_in? %>
+                <% if admin?(current_user) %>
+                  <li class="nav-item me-3 me-lg-0">
+                    <a class="nav-link text-white mt-1" href="<%= admin_dashboard_path %>">Go to Admin Dashboard</a>
+                  </li>
+                <%end %>
+              <%end %>
+                <% if !admin?(current_user) %>
+                  <li class="nav-item">
+                    <%= link_to my_cart_path, class: 'nav-link d-flex', style: 'text-decoration: none; color: #ffffff;' do %>
+                      <i class="fa fa-shopping-cart" style="font-size: 23px;"></i>
+                      <span style="margin-left: 5px;margin-top: 5px;">Cart</span> <span style="margin-top: 3px; margin-left: 5px;">(<%= cart_counter(current_user) %>)</span>
+                    <% end %>
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to my_cart_path, class: 'nav-link d-flex', style: 'text-decoration: none; color: #ffffff;' do %>
+                      <i class="fa fa-heart" style="font-size: 23px;"></i>
+                      <span style="margin-left: 5px;margin-top: 5px;">Wishlist</span> <span style="margin-top: 3px; margin-left: 5px;">(<%= cart_counter(current_user) %>)</span>
+                    <% end %>
+                  </li>
+                <%end %>
+
+              <% if !user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class: 'nav-link d-flex', style: 'text-decoration: none; color: #ffffff;' do %>
+                    <i class="fa fa-user" style="font-size: 23px;"></i>
+                    <span style="margin-left: 5px;margin-top: 5px;">Login</span>
+                  <% end %>
+                </li>
+              <%end %>
+
+              <% if user_signed_in? %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-user" style="font-size: 23px;"></i> <%= "#{current_user.first_name} #{current_user.last_name}" %>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="<%= user_profile_path %>"><i class="fa fa-user"></i> Profile</a></li>
+                    <% if !admin?(current_user) %>
+                      <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                    <%end %>
+                    <%= button_to destroy_user_session_path, method: :delete, style: 'text-decoration:none;background: #fff;border: none;' do %>
+                      <li>
+                        <span class="dropdown-item d-flex"><i class="fa fa-sign-out" style="margin-top: 4px;margin-right: 4px;"></i> Sign Out</span>
+                      </li>
+                    <% end %>
+                  </ul>
+                </li>
+              <%end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item">
+              <span class="nav-link">|</span>
+<!--              <a class="nav-link" href="#">|</a>-->
+            </li>
+            <% Category.roots.each do |category| %>
+              <li class="nav-item dropdown">
+                <%= link_to category.title, admin_category_path(category), class: 'nav-link dropdown-toggle', id: "categoryDropdown#{category.id}", role: "button", 'aria-haspopup' => 'true', 'aria-expanded' => 'false' %>
+
+                <!-- Dropdown menu for subcategories -->
+                <ul class="dropdown-menu" aria-labelledby="categoryDropdown<%= category.id %>">
+                  <% category.children.each do |subcategory| %>
+                    <li>
+                      <%= link_to subcategory.title, admin_category_path(subcategory), class: 'dropdown-item' %>
+                    </li>
+                  <% end %>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>

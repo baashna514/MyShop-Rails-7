@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f5f5f5;
+          color: #333;
+          text-align: center;
+          padding: 20px;
+      }
+
+      h1 {
+          color: #4CAF50;
+      }
+
+      .container {
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      p {
+          font-size: 16px;
+          line-height: 1.6;
+      }
+
+      .button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #4CAF50;
+          color: #fff;
+          text-decoration: none;
+          border-radius: 5px;
+          margin-top: 20px;
+      }
+  </style>
+  <title>Congratulations! You have successfully signed up.</title>
+</head>
+<body>
+<div class="container">
+  <h1>Welcome to Our Application, <%= @user.name %>!</h1>
+  <p>Thank you for joining our community. We're excited to have you on board.</p>
+  <p>Here are some details about your account:</p>
+  <ul>
+    <li><strong>Email:</strong> <%= @user.email %></li>
+    <li><strong>Phone:</strong> <%= @user.phone %></li>
+    <li><strong>City:</strong> <%= @user.city %></li>
+    <li><strong>Address:</strong> <%= @user.address %></li>
+  </ul>
+  <p>Feel free to explore our application and let us know if you have any questions or feedback.</p>
+  <a href="#" class="button">Get Started</a>
+</div>
+</body>
+</html>

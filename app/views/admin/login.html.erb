@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="app app-login p-0">
+<div class="row g-0 app-auth-wrapper">
+  <div class="col-12 col-md-7 col-lg-6 auth-main-col d-flex justify-content-center align-items-center text-center p-5">
+    <div class="">
+      <div class="app-auth-body mx-auto">
+        <div class="app-auth-branding mb-4"><a class="app-logo" href="<%= admin_login_path %>"><%= image_tag("admin-logo.png", alt: "MyShop Logo", style: "width: 280px;") %></a></div>
+        <h2 class="auth-heading text-center mb-5">Log in to Admin Dashboard</h2>
+        <div class="auth-form-container text-start">
+          <%= form_for(@resource, as: @resource_name, url: session_path(@resource_name), class: 'auth-form login-form') do |f| %>
+            <div class="email mb-3">
+              <label class="sr-only" for="signin-email">Email</label>
+              <%= f.email_field :email, class: "form-control signin-email", placeholder: "Name your email", autofocus: true  %>
+            </div><!--//form-group-->
+            <div class="password mb-3">
+              <label class="sr-only" for="signin-password">Password</label>
+              <%= f.password_field :password, class: "form-control signin-password", placeholder: "Choose a password" %>
+            </div><!--//form-group-->
+            <div class="text-center">
+              <button type="submit" class="btn btn-success w-100 theme-btn mx-auto">Log In</button>
+            </div>
+          <%end %>
+        </div><!--//auth-form-container-->
+      </div><!--//auth-body-->
+
+    </div><!--//flex-column-->
+  </div><!--//auth-main-col-->
+  <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+    <div class="auth-background-holder" style="background:url('<%= asset_path("background-3.jpg") %>')">
+    </div>
+    <div class="auth-background-mask"></div>
+    <div class="auth-background-overlay p-3 p-lg-5">
+      <div class="d-flex flex-column align-content-end h-100">
+        <div class="h-100"></div>
+        <div class="overlay-content p-3 p-lg-4 rounded">
+          <h5 class="mb-3 overlay-title">MyShop.PK - Your Gateway To Quality Shopping</h5>
+          <div>MyShop.PK is your premier destination for a seamless online shopping experience. As a leading e-commerce portal, we offer a diverse range of products, from electronics and fashion to home essentials, all curated to meet your modern lifestyle needs. With a user-friendly interface, secure payment options, and swift delivery services, we strive to make your shopping journey convenient and enjoyable. Explore the latest trends, discover exclusive deals, and indulge in the convenience of doorstep delivery with MyShop.PK – Your Gateway To Quality Shopping.</div>
+        </div>
+      </div>
+    </div><!--//auth-background-overlay-->
+  </div><!--//auth-background-col-->
+
+</div><!--//row-->
+
+
+</body>
+</html>
+

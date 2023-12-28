@@ -1,0 +1,130 @@
+<%= render 'layouts/navbar' %>
+
+<div class="container">
+  <div class="row mt-5 mb-5">
+    <div class="col-md-12">
+      <% flash.each do |type, messages| %>
+        <div class="alert <%= flash_class(type) %>">
+        <% Array(messages).each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>Checkout Form</h5>
+        </div>
+        <div class="card-body">
+          <div class="col-md-12">
+            <h4 class="mb-3">Billing address</h4>
+            <%= form_with(model: @order, url: place_an_order_path, method: :post, :html => {class: "form-horizontal", role: "form", id: 'payment-form'}) do |form| %>
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <%= form.label :name, 'Full name <span class="text-danger"><b>*</b></span>'.html_safe %>
+                  <%= form.text_field :name, class: 'form-control', id: 'name', value: order[:name] %>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :phone, 'Phone <span class="text-danger"><b>*</b></span>'.html_safe %>
+                <%= form.text_field :phone, class: 'form-control', id: 'phone', value: order[:phone] %>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :username, 'Username <span class="text-muted">(Optional)</span>'.html_safe %>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                  </div>
+                  <%= form.text_field :username, class: 'form-control', id: 'username', placeholder: 'Username' %>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <%= form.label :email, 'Email <span class="text-danger"><b>*</b></span>'.html_safe %>
+                <%= form.email_field :email, class: 'form-control', id: 'email', value: order[:email] %>
+              </div>
+
+              <div class="row">
+                <div class="col-md-8 mb-3">
+                  <%= form.label :address, 'Address <span class="text-danger"><b>*</b></span>'.html_safe %>
+                  <%= form.text_field :address, class: 'form-control', id: 'address', value: order[:address] %>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                  <%= form.label :city, 'City <span class="text-danger"><b>*</b></span>'.html_safe %>
+                  <%= form.text_field :city, class: 'form-control', id: 'city', value: order[:city] %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <%= form.label :country, 'Country <span class="text-muted">(Optional)</span>'.html_safe %>
+                  <%= form.select :country, ['Pakistan','Iran'], {}, { class: 'custom-select form-control d-block w-100', id: 'country' } %>
+                </div>
+                <div class="col-md-4 mb-3">
+                  <%= form.label :state, 'State <span class="text-muted">(Optional)</span>'.html_safe %>
+                  <%= form.select :state, ['Punjab', 'Sindh', 'KPK', 'Balochistan'], {}, { class: 'custom-select form-control d-block w-100', id: 'state' } %>
+                </div>
+                <div class="col-md-3 mb-3">
+                  <%= form.label :zip, 'Zip <span class="text-muted">(Optional)</span>'.html_safe %>
+                  <%= form.text_field :zip, class: 'form-control', id: 'zip', placeholder: '' %>
+                </div>
+              </div>
+
+              <hr class="mb-4">
+              <h4 class="mb-3">Payment</h4>
+              <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                  <%= form.radio_button :payment_method, 'cash_on_delivery', class: 'custom-control-input', id: 'cash_on_delivery', checked: true %>
+                  <%= form.label :payment_method, 'Cash On Delivery', class: 'custom-control-label', for: 'cash_on_delivery' %>
+                </div>
+              </div>
+              <hr class="mb-4">
+              <%= form.submit 'Place Order', class: 'btn btn-sm btn-success btn-lg btn-block', id: 'submit-button' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h5>Order Detail</h5>
+        </div>
+        <div class="card-body">
+          <div class="col-md-12">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+              <span class="text-muted">Your cart</span>
+              <span class="badge badge-secondary badge-pill"><%= cart_counter(session[:user_id]) %></span>
+            </h4>
+            <ul class="list-group mb-3">
+              <% total_sum = 0 %>
+              <% @carts.each do |cart| %>
+                <% total = cart.product.p_price * cart.quantity %>
+                <% total_sum += total.to_i %>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                  <div>
+                    <h6 class="my-0"><%= cart.product.p_name %></h6>
+                    <small class="text-muted"><%= cart.product.p_price %> * <%= cart.quantity %></small>
+                  </div>
+                  <span class="text-muted"><%= total %></span>
+                </li>
+              <%end %>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Total (PKR)</span>
+                <strong><%= total_sum %></strong>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render 'layouts/footer' %>

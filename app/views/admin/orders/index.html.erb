@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="app">
+
+<%= render 'admin/header' %>
+
+<div class="app-wrapper">
+  <div class="app-content pt-3 p-md-3 p-lg-4">
+    <div class="container-xl">
+      <h1 class="app-page-title">Orders</h1>
+      <hr class="mb-4">
+      <div class="row g-4 mb-4">
+        <% flash.each do |type, message| %>
+          <div class="alert <%= flash_class(type) %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tab-content" id="orders-table-tab-content">
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                <tr>
+                  <th class="cell">SR#</th>
+                  <th class="cell">Date</th>
+                  <th class="cell">Customer</th>
+                  <th class="cell">Phone</th>
+                  <th class="cell">Email</th>
+                  <th class="cell">Address</th>
+                  <th class="cell">City</th>
+                  <th class="cell">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <% @orders.each_with_index do |order, index| %>
+                    <tr>
+                      <td class="cell"><%= index + 1 %></td>
+                      <td class="cell"><%= order.order_date %></td>
+                      <td class="cell"><%= "#{order.user.first_name} #{order.user.last_name}" %></td>
+                      <td class="cell"><%= order.phone %></td>
+                      <td class="cell"><%= order.email %></td>
+                      <td class="cell"><%= order.address %></td>
+                      <td class="cell"><%= order.city %></td>
+                      <td class="cell">
+                        <table class="table app-table-hover mb-0 text-left">
+                          <thead>
+                          <th class="cell">Product</th>
+                          <th class="cell">Quantity</th>
+                          <th class="cell">Price</th>
+                          <th class="cell">Total</th>
+                          </thead>
+                          <tbody>
+                          <% order.order_items.each do |order_item| %>
+                            <tr>
+                              <td class="cell">
+                                <div class="row g-3 align-items-center">
+                                  <div class="col-12 col-lg-auto text-center text-lg-start">
+                                    <%= image_tag order_item.product.p_image, class: 'profile-image', style: 'width:50px;height:50px;border-radius:50%;' if order_item.product.p_image.attached? %>
+                                  </div>
+                                  <div class="col-12 col-lg-auto text-center text-lg-start">
+                                    <h4 class="notification-title mb-1" style="font-size:14px;"><%= order_item.product.p_name %></h4>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="cell"><%= order_item.quantity %></td>
+                              <td class="cell"><%= order_item.price %></td>
+                              <td class="cell"><%= order_item.price * order_item.quantity %></td>
+                            </tr>
+                          <%end %>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  <%end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

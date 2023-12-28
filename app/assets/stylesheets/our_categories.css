@@ -1,0 +1,37 @@
+.searchitem i {
+    position: absolute;
+    right: 18px;
+    top: 10px;
+    font-size: 13px
+}
+
+.btn {
+    height: 35px;
+    width: 170px;
+    border: none;
+    border-radius: 20px;
+    background-color: #633a9c;
+    font-size: 14px;
+    font-weight: 500
+}
+
+.card {
+    height: 130px;
+    overflow: hidden;
+    border: none;
+    border-radius: 0px;
+}
+
+.card a{
+    color: #000 !important;
+    text-decoration: none;
+}
+
+.card a:hover{
+    color: #17a2b8 !important;
+}
+
+.imagename {
+    font-size: 14px;
+    font-weight: bold
+}

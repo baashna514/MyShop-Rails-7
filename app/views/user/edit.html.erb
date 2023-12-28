@@ -1,0 +1,15 @@
+
+<div class="container emp-profile mt-5">
+  <% flash.each do |type, messages| %>
+    <div class="alert <%= flash_class(type) %>">
+      <% Array(messages).each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </div>
+  <% end %>
+  <h2 class="fw-bold mb-5 text-center">Edit Profile</h2>
+  <%= form_with(model: @user, url: update_profile_path(@user), method: :post, local: true) do |form| %>
+    <%= render 'user/form', form: form %>
+    <%= form.button 'Update Profile', class: 'btn btn-primary mb-4', type: 'submit' %>
+  <% end %>
+</div>

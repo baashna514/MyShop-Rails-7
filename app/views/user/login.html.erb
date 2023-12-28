@@ -1,0 +1,60 @@
+<!-- Section: Design Block -->
+<section class="">
+  <!-- Background image -->
+  <div class="p-5 bg-image" style="
+  background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg');
+    height: 300px;
+  "></div>
+  <!-- Background image -->
+
+  <div class="card mx-4 mx-md-5 shadow-5-strong" style="
+  margin-top: -100px;
+    background: hsla(0, 0%, 100%, 0.8);
+    backdrop-filter: blur(30px);
+  ">
+    <div class="card-body py-5 px-md-5">
+
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-8">
+          <% flash.each do |type, messages| %>
+            <div class="alert <%= flash_class(type) %>">
+              <% Array(messages).each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </div>
+          <% end %>
+          <h2 class="fw-bold mb-5 text-center">Login in</h2>
+          <%= form_with(:html => {class: "form-horizontal", role: "form"}, url: check_credentials_path) do |f| %>
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <%= f.label :email%>
+                  <%= f.email_field :email, class: "form-control", placeholder: "Name your email", autofocus: true  %>
+                </div>
+              </div>
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <%= f.label :password %>
+                  <%= f.password_field :password, class: "form-control", placeholder: "Choose a password" %>
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-4">
+                <div class="form-outline">
+                  <a href="<%= new_password_reset_path %>" class="text-primary">Forget password?</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit button -->
+            <%= f.submit "Login", class: "btn btn-primary btn-sm" %>
+
+            <span class="float-right">Don't have an Account? <a href="<%= sign_up_path %>" class="text-primary">Sign up</a> Now</span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Section: Design Block -->

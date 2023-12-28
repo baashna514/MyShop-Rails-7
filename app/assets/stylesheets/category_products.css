@@ -1,0 +1,101 @@
+*{
+    box-sizing: border-box;
+}
+#burgundy{
+    color: rgb(153, 40, 59);
+}
+#orange,select,.btn{
+    color: #17a2b8;
+}
+nav{
+    padding: 0px 100px;
+}
+.form-group{
+    margin-bottom: 5px;
+}
+label{
+    padding-left: 10px;
+}
+.form-group:last-child{
+    margin-bottom: 0;
+}
+h6{
+    margin-bottom: 0px;
+}
+#sort{
+    outline: none;
+    border: none;
+}
+@media(min-width:1200px){
+    #sidebar{
+        width: 20%;
+        padding: 20px;
+        float: left;
+    }
+    #products{
+        width: 80%;
+        padding: 10px;
+        margin: 0;
+        float: right;
+    }
+    del{
+        padding-right: 2px;
+    }
+}
+@media(min-width:992px) and (max-width:1199px){
+    #sidebar{
+        width: 20%;
+        padding: 20px;
+        float: left;
+    }
+    #products{
+        width: 80%;
+        padding: 10px;
+        margin: 0;
+        float: right;
+    }
+    .price{
+        width: 99px;
+    }
+}
+@media(min-width:768px) and (max-width:991px){
+    #sidebar{
+        width: 25%;
+        padding: 20px;
+        float: left;
+    }
+    #products{
+        width: 75%;
+        padding: 10px;
+        margin: 0;
+        float: right;
+    }
+}
+@media(min-width:576px) and (max-width:767px){
+    #sidebar{
+        width: 25%;
+        padding: 20px;
+        float: left;
+    }
+    #products{
+        width: 75%;
+        padding: 10px;
+        margin: 0;
+        float: right;
+    }
+    #off{
+        padding-left: 2px;
+    }
+    #sorting span,#res{
+        font-size: 14px;
+    }
+}
+@media(max-width:575px){
+    #sidebar{
+        display: none;
+    }
+    #sorting,#res{
+        font-size: 12px;
+        margin-top: 2%;
+    }
+}

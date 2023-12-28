@@ -1,0 +1,155 @@
+<%= render 'layouts/navbar' %>
+<div class="container emp-profile mt-5">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-12">
+        <% flash.each do |type, messages| %>
+          <div class="alert <%= flash_class(type) %>">
+            <% Array(messages).each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <div class="col-md-4">
+        <div class="profile-img">
+          <img src="https://creazilla-store.fra1.digitaloceanspaces.com/icons/7915728/user-icon-md.png" alt=""/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="profile-head">
+          <h5>
+            <%= "#{current_user.first_name} #{current_user.last_name}" %>
+          </h5>
+          <h6>
+            Ror Developer
+          </h6>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+            </li>
+            <% if !admin?(current_user) %>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Orders</a>
+            </li>
+              <%end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <a href="<%= edit_user_registration_path %>" class="btn btn-primary btn-sm">Edit Profile</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="profile-work">
+          <p>WORK LINK</p>
+          <a href="">Website Link</a><br/>
+          <a href="">Bootsnipp Profile</a><br/>
+          <a href="">Bootply Profile</a>
+          <p>SKILLS</p>
+          <a href="">Web Designer</a><br/>
+          <a href="">Web Developer</a><br/>
+          <a href="">WordPress</a><br/>
+          <a href="">WooCommerce</a><br/>
+          <a href="">PHP, .Net</a><br/>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="tab-content profile-tab" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+              <div class="col-md-6">
+                <label>User Id</label>
+              </div>
+              <div class="col-md-6">
+                <p>Baashna514</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Name</label>
+              </div>
+              <div class="col-md-6">
+                <p><%= "#{@user.first_name} #{@user.last_name}" %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Email</label>
+              </div>
+              <div class="col-md-6">
+                <p><%= @user.email %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Phone</label>
+              </div>
+              <div class="col-md-6">
+                <p><%= @user.phone %></p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label>Address</label>
+              </div>
+              <div class="col-md-6">
+                <p><%= @user.address %></p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-bordered m-0">
+                  <thead>
+                    <tr>
+                      <th class="text-center py-3 px-4">Order Date</th>
+                      <th class="text-right py-3 px-4">Status</th>
+                      <th class="text-center py-3 px-4">Payment Method</th>
+                      <th class="text-center py-3 px-4">Details</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% @orders.each do |order| %>
+                    <tr>
+                      <td><%= order.order_date %></td>
+                      <td><%= order.status %></td>
+                      <td><%= order.payment_method %></td>
+                      <td>
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>Product</th>
+                              <th>quantity</th>
+                              <th>price</th>
+                              <th>Total</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <% order.order_items.each do |order_item| %>
+                            <tr>
+                              <td><%= order_item.product.p_name %></td>
+                              <td><%= order_item.quantity %></td>
+                              <td><%= order_item.price %></td>
+                              <td><b><%= order_item.price * order_item.quantity %></b></td>
+                            </tr>
+                            <%end %>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  <%end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<%= render 'layouts/footer' %>

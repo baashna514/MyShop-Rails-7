@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="app">
+
+<%= render 'admin/header' %>
+
+<div class="app-wrapper">
+  <div class="app-content pt-3 p-md-3 p-lg-4">
+    <div class="container-xl">
+      <h1 class="app-page-title">Users</h1>
+      <hr class="mb-4">
+      <div class="row g-4 mb-4">
+        <% flash.each do |type, message| %>
+          <div class="alert <%= flash_class(type) %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tab-content" id="orders-table-tab-content">
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                <tr>
+                  <th class="cell">SR#</th>
+                  <th class="cell">Name</th>
+                  <th class="cell">Email</th>
+                  <th class="cell">Phone</th>
+                  <th class="cell">Address</th>
+                  <th class="cell">City</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @users.each_with_index do |user, index| %>
+                  <tr>
+                    <td class="cell"><%= index + 1 %></td>
+                    <td class="cell"><%= "#{user.first_name} #{user.last_name}" %></td>
+                    <td class="cell"><%= user.email %></td>
+                    <td class="cell"><%= user.phone %></td>
+                    <td class="cell"><%= user.address %></td>
+                    <td class="cell"><%= user.city %></td>
+                  </tr>
+                <%end %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+        <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav><!--//app-pagination-->
+      </div><!--//tab-content-->
+    </div><!--//container-fluid-->
+  </div><!--//app-content-->
+</div><!--//app-wrapper-->
+
+</body>
+</html>
+

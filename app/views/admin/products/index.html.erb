@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="app">
+
+<%= render 'admin/header' %>
+
+<div class="app-wrapper">
+  <div class="app-content pt-3 p-md-3 p-lg-4">
+    <div class="container-xl">
+      <h1 class="app-page-title">Products</h1>
+      <hr class="mb-4">
+      <div class="row g-4 mb-4">
+        <% flash.each do |type, message| %>
+          <div class="alert <%= flash_class(type) %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row mb-4">
+        <div class="col-auto">
+          <div class="page-utilities">
+            <div class="row g-2">
+              <div class="col-auto">
+                <a href="<%= admin_add_product_path %>" class="btn btn-success" style="width: 130px;">Add Product</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="tab-content" id="orders-table-tab-content">
+        <div class="app-card app-card-orders-table shadow-sm mb-5">
+          <div class="app-card-body">
+            <div class="table-responsive">
+              <table class="table app-table-hover mb-0 text-left">
+                <thead>
+                <tr>
+                  <th class="cell">SR#</th>
+                  <th class="cell">Product</th>
+                  <th class="cell">Description</th>
+                  <th class="cell">Price</th>
+                  <th class="cell">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @products.each_with_index do |product, index| %>
+                  <tr>
+                    <td class="cell"><%= index + 1 %></td>
+                    <td class="cell">
+                      <div class="row g-3 align-items-center">
+                        <div class="col-12 col-lg-auto text-center text-lg-start">
+                          <%= image_tag product.p_image, class: 'profile-image', style: 'width:70px;height:70px;border-radius:50%;' if product.p_image.attached? %>
+                        </div>
+                        <div class="col-12 col-lg-auto text-center text-lg-start">
+                          <h4 class="notification-title mb-1" style="font-size: 16px;"><%= product.p_name %></h4>
+                          <ul class="notification-meta list-inline mb-0">
+                            <%= product.categories.pluck(:title).join(' | ') %>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="cell"><%= product.p_desc %></td>
+                    <td class="cell"><%= product.p_price %></td>
+                    <td>
+                      <%= link_to raw('<i class="fa fa-edit" style="margin-top:8px;"></i>'), admin_edit_product_path(product), method: :get, class: 'btn btn-sm btn-primary mt-4', title: 'Edit Product', style: 'width:40px;'%>
+                      <%= link_to raw('<i class="fa fa-trash" style="margin-top:8px;"></i>'), admin_delete_product_path(product), method: :delete, class: 'btn btn-sm btn-danger mt-4', title: 'Remove Product', style: 'width:40px;'%>
+                    </td>
+                  </tr>
+                <%end %>
+
+                </tbody>
+              </table>
+            </div><!--//table-responsive-->
+
+          </div><!--//app-card-body-->
+        </div><!--//app-card-->
+        <nav class="app-pagination">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav><!--//app-pagination-->
+      </div><!--//tab-content-->
+
+
+
+    </div><!--//container-fluid-->
+  </div><!--//app-content-->
+
+
+
+</div><!--//app-wrapper-->
+
+</body>
+</html>
+

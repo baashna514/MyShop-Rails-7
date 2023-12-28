@@ -1,0 +1,111 @@
+<style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+
+    body {
+        background-color: #f2efec
+    }
+    button:hover {
+        background-color: #17a2b8 !important;
+    }
+    .icon .mx-3:hover {
+        background-color: #17a2b8 !important;
+    }
+</style>
+
+<%= render 'layouts/navbar' %>
+
+<section class="section-products">
+  <%= render 'layouts/slider' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-lg-12">
+        <% flash.each do |type, messages| %>
+          <div class="alert <%= flash_class(type) %>">
+            <% Array(messages).each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid p-0">
+        <a class="navbar-brand text-uppercase fw-800" href="#"><span class="border-red pe-2">Categories</span></a>
+      </div>
+    </nav>
+    <div class="row mt-2 g-4">
+      <% @categories.each do |category| %>
+        <div class="col-md-3">
+          <div class="card p-1">
+            <a href="<%= category_products_path(category.title) %>">
+              <div class="d-flex justify-content-between align-items-center p-2">
+                <div class="flex-column lh-1 imagename"> <span><%= category.title %></span></div>
+                <div><%= image_tag category.image,  style:'width:100px;height:100px;' if category.image.attached? %></div>
+              </div>
+            </a>
+          </div>
+        </div>
+      <%end %>
+    </div>
+<!--    <div class="row">-->
+<!--      <div class="col-lg-12">-->
+        <%#= search_form_for @q, url: root_path do |f| %>
+<!--          <div class="box">-->
+<!--            <i class="fa-brands fa-searching"></i>-->
+            <%#= f.hidden_field :p_name_cont %>
+            <%#= f.search_field :p_name_cont, placeholder: 'Search by product name' %>
+<!--          </div>-->
+        <%# end %>
+<!--      </div>-->
+<!--    </div>-->
+    <div class="row mt-5">
+      <div class="container bg-white">
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+          <div class="container-fluid p-0">
+            <a class="navbar-brand text-uppercase fw-800" href="#"><span class="border-red pe-2">Featured</span>Products</a>
+          </div>
+        </nav>
+
+        <div class="row">
+            <% @products.each do |product| %>
+                <div class="col-lg-3 col-sm-6 d-flex flex-column product-item my-3">
+                  <div class="product">
+                    <%= image_tag(rails_blob_path(product.p_image), alt: "Product") %>
+                    <ul class="d-flex align-items-center justify-content-center icons">
+                      <%= form_tag(product_detail_path(product.p_name), method: :get) do %>
+                        <li class="icon mx-3" style="margin-left: 0px !important;" onclick="this.parentNode.submit();">
+                          <i class="fa fa-eye"></i>
+                        </li>
+                      <% end %>
+                      <li class="icon mx-3" title="Add to wishlist"><span class="fa fa-heart"></span></li>
+                      <%= form_tag(add_to_cart_path(product), method: :post) do %>
+                        <li class="icon mx-3" style="margin-left: 0px !important;" onclick="this.parentNode.submit();">
+                          <i class="fa fa-shopping-cart"></i>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                  <div class="tag bg-red">
+                    <%= product.categories.pluck(:title).join(' | ') %>
+                  </div>
+                  <div class="title pt-4 pb-1"><%= product.p_name %></div>
+                  <div class="price"><%= product.p_price %> - PKR</div>
+                </div>
+            <%end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <%= paginate @products %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%= render 'layouts/footer' %>

@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :first_name, class: 'form-label' %>
+        <%= form.text_field :first_name, class: 'form-control', id: 'first_name' %>
+      </div>
+    </div>
+
+  <div class="col-md-6 mb-4">
+    <div class="form-outline">
+      <%= form.label :last_name, class: 'form-label' %>
+      <%= form.text_field :last_name, class: 'form-control', id: 'last_name' %>
+    </div>
+  </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :phone, class: 'form-label' %>
+        <%= form.text_field :phone, class: 'form-control', id: 'phone' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :email, class: 'form-label' %>
+        <%= form.email_field :email, class: 'form-control', id: 'email' %>
+      </div>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+
+    <div class="col-md-6 mb-4">
+      <%= form.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= form.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+      <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :password_confirmation, class: 'form-label' %>
+        <%= form.password_field :password_confirmation, class: 'form-control', id: 'password', autocomplete: "new-password" %>
+      </div>
+    </div>
+
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :current_password, class: 'form-label' %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= form.password_field :current_password, autocomplete: "current-password", class: 'form-control' %>
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :city, class: 'form-label' %>
+        <%= form.text_field :city, class: 'form-control', id: 'city' %>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        <%= form.label :address, class: 'form-label' %>
+        <%= form.text_field :address, class: 'form-control', id: 'address' %>
+      </div>
+    </div>
+  </div>
