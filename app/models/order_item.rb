@@ -16,7 +16,6 @@ class OrderItem < ApplicationRecord
         @row = OrderItem.new(item_details)
         if @row
           @row.save
-          return true
         end
       end
     end

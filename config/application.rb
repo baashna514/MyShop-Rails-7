@@ -28,5 +28,7 @@ module Ecommerce
     config.active_job.queue_adapter = :async
     config.action_mailer.default_url_options = { host: '127.0.0.1:3000' }
 
+    config.cache_store = :memory_store
+
   end
 end

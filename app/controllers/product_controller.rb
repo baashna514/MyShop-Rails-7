@@ -1,10 +1,25 @@
 class ProductController < ApplicationController
-
   def index
-    puts "Ransack parameters: #{params[:q]}"
-    @q = Product.includes(p_image_attachment: [:blob]).ransack(params[:q])
-    @products = @q.result(distinct: true).page params[:page]
-    @categories = Category.includes(image_attachment: [:blob]).order(Arel.sql('RANDOM()')).limit(8)
+
+
+      puts "Ransack parameters: #{params[:q]}"
+      @q = Product.includes(:categories, p_image_attachment: [:blob]).ransack(params[:q])
+      @products_data = @q.result(distinct: true).page(params[:page])
+
+      @serialized_products = @products_data.map do |product|
+        product_url = "http://localhost:3000" + "#{rails_blob_path(product.p_image, only_path: true)}"
+        product.define_singleton_method(:image_url) { product_url }
+        product
+      end
+
+      @products = Rails.cache.fetch('products', expires_in: 1.hour) do
+        @serialized_products
+      end
+
+      @categories = Rails.cache.fetch('categories', expires_in: 1.hour) do
+        Category.includes(image_attachment: [:blob]).order(Arel.sql('RANDOM()')).limit(8)
+      end
+
   end
 
   def categoryProducts

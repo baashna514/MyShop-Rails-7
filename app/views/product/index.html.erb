@@ -73,8 +73,10 @@
 
         <div class="row">
             <% @products.each do |product| %>
+
                 <div class="col-lg-3 col-sm-6 d-flex flex-column product-item my-3">
                   <div class="product">
+<!--                    <img src="<%# product.image_url %>", alt="No Image">-->
                     <%= image_tag(rails_blob_path(product.p_image), alt: "Product") %>
                     <ul class="d-flex align-items-center justify-content-center icons">
                       <%= form_tag(product_detail_path(product.p_name), method: :get) do %>
@@ -102,7 +104,7 @@
     </div>
     <div class="row">
       <div class="col-lg-6">
-        <%= paginate @products %>
+        <%#= paginate @products %>
       </div>
     </div>
   </div>

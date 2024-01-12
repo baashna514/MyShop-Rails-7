@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :carts
   has_many :order_items
   has_one_attached :p_image, dependent: :destroy
+  attr_accessor :image_url
   paginates_per 12
 
 

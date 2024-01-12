@@ -8,6 +8,8 @@ class Order < ApplicationRecord
   has_many :order_items
   belongs_to :user
 
+  after_create :check_and_send_email
+
   def self.create_order(user_id, params)
     params[:order_date] = Time.current
     params[:user_id] = user_id
@@ -25,6 +27,13 @@ class Order < ApplicationRecord
   def self.send_daily_orders_email
     orders = where(created_at: Date.today.beginning_of_day..Date.today.end_of_day)
     AdminMailer.daily_order_summary(orders).deliver_now
+  end
+
+  private
+  def check_and_send_email
+    if self.order_items.count
+      OrderMailJob.perform_later(self)
+    end
   end
 
 end

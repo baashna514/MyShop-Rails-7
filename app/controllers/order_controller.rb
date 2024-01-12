@@ -8,7 +8,7 @@ class OrderController < ApplicationController
       result = OrderItem.create_order_items(order, cart_items)
       if result
         Cart.where(user_id: current_user.id).destroy_all
-        OrderMailer.order_email(order).deliver_now
+        # OrderMailJob.perform_later(order)
         flash[:success] = "Order was successfully placed"
       else
         flash[:error] = "Order was not placed"

@@ -95,7 +95,9 @@
       <tr>
         <td>
           <div class="product-details">
-            <%= image_tag item.product.p_image, class: 'product-image' if item.product.p_image.attached? %>
+            <% if item.product.p_image.attached? %>
+              <%= image_tag attachments[item.product.p_image.filename.to_s].url, class: 'product-image' %>
+            <% end %>
             <div class="product-description">
               <p><strong><%= item.product.p_name %></strong></p>
               <p><%= item.product.p_desc %></p>
