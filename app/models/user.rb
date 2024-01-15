@@ -4,7 +4,8 @@ class User < ApplicationRecord
   validate :password_length, if: -> { password.present? }
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :carts
   has_many :orders
@@ -13,6 +14,17 @@ class User < ApplicationRecord
     if session[:user_id]
       @user = User.find_by(id: session[:user_id])
       return @user if @user
+    end
+  end
+
+  def self.from_omniauth(auth)
+    debugger
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+      user.first_name = auth.info.first_name
+      user.last_name = auth.info.last_name
+      user.avatar_url = auth.info.image
     end
   end
 

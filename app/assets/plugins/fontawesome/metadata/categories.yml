@@ -226,7 +226,7 @@ astronomy:
     - satellite
     - satellite-dish
     - shuttle-space
-    - user-astronaut
+    - users-astronaut
   label: Astronomy
 automotive:
   icons:
@@ -274,7 +274,7 @@ buildings:
     - building-ngo
     - building-shield
     - building-un
-    - building-user
+    - building-users
     - building-wheat
     - campground
     - church
@@ -282,7 +282,7 @@ buildings:
     - dungeon
     - gopuram
     - hospital
-    - hospital-user
+    - hospital-users
     - hotel
     - house
     - house-chimney
@@ -555,7 +555,7 @@ clothing-fashion:
     - shirt
     - shoe-prints
     - socks
-    - user-tie
+    - users-tie
     - vest
     - vest-patches
   label: Clothing + Fashion
@@ -601,7 +601,7 @@ coding:
     - shield-halved
     - sitemap
     - terminal
-    - user-secret
+    - users-secret
     - window-maximize
     - window-minimize
     - window-restore
@@ -913,7 +913,7 @@ education:
     - book-open
     - book-open-reader
     - chalkboard
-    - chalkboard-user
+    - chalkboard-users
     - graduation-cap
     - laptop-code
     - laptop-file
@@ -928,7 +928,7 @@ education:
     - school-flag
     - school-lock
     - shapes
-    - user-graduate
+    - users-graduate
   label: Education
 emoji:
   icons:
@@ -1288,13 +1288,13 @@ household:
     - faucet
     - faucet-drip
     - fire-burner
-    - house-chimney-user
+    - house-chimney-users
     - house-chimney-window
     - house-fire
     - house-laptop
     - house-lock
     - house-signal
-    - house-user
+    - house-users
     - jar
     - jar-wheat
     - jug-detergent
@@ -1377,7 +1377,7 @@ humanitarian:
     - building-ngo
     - building-shield
     - building-un
-    - building-user
+    - building-users
     - building-wheat
     - burst
     - bus
@@ -1390,7 +1390,7 @@ humanitarian:
     - circle-h
     - circle-nodes
     - clipboard-question
-    - clipboard-user
+    - clipboard-users
     - cloud-bolt
     - cloud-showers-heavy
     - cloud-showers-water
@@ -1635,8 +1635,8 @@ humanitarian:
     - truck-front
     - truck-medical
     - truck-plane
-    - user-doctor
-    - user-injured
+    - users-doctor
+    - users-injured
     - users-between-lines
     - users-line
     - users-rays
@@ -1984,7 +1984,7 @@ medical-health:
     - capsules
     - circle-h
     - circle-radiation
-    - clipboard-user
+    - clipboard-users
     - clock-rotate-left
     - comment-medical
     - crutch
@@ -2013,7 +2013,7 @@ medical-health:
     - heart-circle-xmark
     - heart-pulse
     - hospital
-    - hospital-user
+    - hospital-users
     - house-chimney-medical
     - house-medical
     - house-medical-circle-check
@@ -2063,8 +2063,8 @@ medical-health:
     - thermometer
     - tooth
     - truck-medical
-    - user-doctor
-    - user-nurse
+    - users-doctor
+    - users-nurse
     - vial
     - vial-circle-check
     - vial-virus
@@ -2399,7 +2399,7 @@ science-fiction:
     - robot
     - rocket
     - space-awesome
-    - user-astronaut
+    - users-astronaut
   label: Science Fiction
 security:
   icons:
@@ -2460,9 +2460,9 @@ security:
     - tower-observation
     - unlock
     - unlock-keyhole
-    - user-lock
-    - user-secret
-    - user-shield
+    - users-lock
+    - users-secret
+    - users-shield
     - vault
   label: Security
 shapes:
@@ -2561,7 +2561,7 @@ social:
     - bell
     - cake-candles
     - camera
-    - circle-user
+    - circle-users
     - comment
     - envelope
     - hashtag
@@ -2584,9 +2584,9 @@ social:
     - thumbs-down
     - thumbs-up
     - thumbtack
-    - user
-    - user-group
-    - user-plus
+    - users
+    - users-group
+    - users-plus
     - users
     - video
   label: Social
@@ -2870,13 +2870,13 @@ users-people:
     - arrows-down-to-people
     - baby
     - bed
-    - chalkboard-user
+    - chalkboard-users
     - child
     - child-dress
     - child-reaching
     - children
-    - circle-user
-    - clipboard-user
+    - circle-users
+    - clipboard-users
     - elevator
     - face-frown
     - face-meh
@@ -2885,10 +2885,10 @@ users-people:
     - head-side-cough-slash
     - head-side-mask
     - head-side-virus
-    - hospital-user
+    - hospital-users
     - hot-tub-person
-    - house-chimney-user
-    - house-user
+    - house-chimney-users
+    - house-users
     - id-badge
     - id-card
     - id-card-clip
@@ -2952,29 +2952,29 @@ users-people:
     - skull
     - square-person-confined
     - street-view
-    - user
-    - user-astronaut
-    - user-check
-    - user-clock
-    - user-doctor
-    - user-gear
-    - user-graduate
-    - user-group
-    - user-injured
-    - user-large
-    - user-large-slash
-    - user-lock
-    - user-minus
-    - user-ninja
-    - user-nurse
-    - user-pen
-    - user-plus
-    - user-secret
-    - user-shield
-    - user-slash
-    - user-tag
-    - user-tie
-    - user-xmark
+    - users
+    - users-astronaut
+    - users-check
+    - users-clock
+    - users-doctor
+    - users-gear
+    - users-graduate
+    - users-group
+    - users-injured
+    - users-large
+    - users-large-slash
+    - users-lock
+    - users-minus
+    - users-ninja
+    - users-nurse
+    - users-pen
+    - users-plus
+    - users-secret
+    - users-shield
+    - users-slash
+    - users-tag
+    - users-tie
+    - users-xmark
     - users
     - users-between-lines
     - users-gear

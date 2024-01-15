@@ -25,12 +25,12 @@ RSpec.describe ApplicationHelper, type: :helper do
   end
 
   context '#admin' do
-    it 'returns true if the user is an admin' do
+    it 'returns true if the users is an admin' do
       user = create(:user, admin: true)
       expect(helper.admin(user.id)).to be_truthy
     end
 
-    it 'returns false if the user is not an admin' do
+    it 'returns false if the users is not an admin' do
       user = create(:user, admin: false)
       expect(helper.admin(user.id)).to be_falsy
     end

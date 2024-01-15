@@ -9,7 +9,7 @@
   <% end %>
   <h2 class="fw-bold mb-5 text-center">Edit Profile</h2>
   <%= form_with(model: @user, url: update_profile_path(@user), method: :post, local: true) do |form| %>
-    <%= render 'user/form', form: form %>
+    <%= render 'users/form', form: form %>
     <%= form.button 'Update Profile', class: 'btn btn-primary mb-4', type: 'submit' %>
   <% end %>
 </div>

@@ -10,7 +10,7 @@ RSpec.describe CartController, type: :controller do
   end
 
   describe 'GET #index' do
-    it 'should assigns the user carts and renders the index template' do
+    it 'should assigns the users carts and renders the index template' do
       get :index
       expect(assigns(:carts)).to eq([cart])
       expect(response).to render_template(:index)
@@ -19,7 +19,7 @@ RSpec.describe CartController, type: :controller do
 
 
   describe 'POST #add_to_cart' do
-    it 'should adds a product to the user\'s cart and redirects to root_path with success flash' do
+    it 'should adds a product to the users\'s cart and redirects to root_path with success flash' do
       post :add_to_cart, params: { id: product.id }
       expect(flash[:success]).to be_present
       expect(flash[:error]).to be_nil
@@ -47,7 +47,7 @@ RSpec.describe CartController, type: :controller do
 
 
   describe 'GET #checkout' do
-    it 'should assigns user information and renders the checkout template' do
+    it 'should assigns users information and renders the checkout template' do
       get :checkout
       expect(assigns(:carts)).to eq([cart])
       expect(assigns(:user)).to eq(user)

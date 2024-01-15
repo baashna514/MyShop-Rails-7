@@ -60,7 +60,7 @@ apper-systems-ab:
   url: 'http://asymmetrik.com'
 ausmed-education:
   icons:
-    - user-nurse
+    - users-nurse
   label: Ausmed Education
   url: 'https://www.ausmed.com.au'
 avianex:
@@ -235,7 +235,7 @@ draft2-digital:
   url: 'http://draft2digital.com'
 dragnsurvey:
   icons:
-    - user-magnifying-glass
+    - users-magnifying-glass
   label: Drag’n Survey
   url: 'https://www.dragnsurvey.com'
 dyalog-apl:
@@ -330,7 +330,7 @@ harvard-medical-school:
     - tablets
     - thermometer
     - truck-medical
-    - user-doctor
+    - users-doctor
     - vial
     - vials
     - weight-scale
@@ -426,7 +426,7 @@ icis:
     - lightbulb-gear
     - person-running-fast
     - right-left-large
-    - user-group-simple
+    - users-group-simple
   label: ICIS
   url: 'https://www.icis.com/'
 in-site-systems:
@@ -514,9 +514,9 @@ med-apps:
 medapps:
   icons:
     - book-medical
-    - book-user
+    - book-users
     - books-medical
-    - clipboard-user
+    - clipboard-users
     - comment-medical
     - crutch
     - crutches
@@ -524,14 +524,14 @@ medapps:
     - files-medical
     - head-side-brain
     - head-side-medical
-    - hospital-user
+    - hospital-users
     - hospitals
     - house-medical
     - laptop-medical
     - message-medical
     - pager
     - stretcher
-    - user-doctor-message
+    - users-doctor-message
     - users-medical
     - walker
   label: MedApps
@@ -558,7 +558,7 @@ mrt:
   url: 'https://medrt.co.jp'
 mylogin-info:
   icons:
-    - user-shield
+    - users-shield
   label: mylogin.info
   url: 'https://www.mylogin.info'
 napster:
@@ -598,7 +598,7 @@ nisutec:
 nompse:
   icons:
     - chalkboard
-    - chalkboard-user
+    - chalkboard-users
   label: Nomp.se
   url: 'https://nomp.se'
 ns8:
@@ -696,7 +696,7 @@ pindigo:
   url: 'https://pindigo.app'
 play-shakespeare:
   icons:
-    - user-shakespeare
+    - users-shakespeare
   label: PlayShakespeare.com
   url: 'https://www.playshakespeare.com'
 plum-run-solutions:
@@ -719,8 +719,8 @@ preflight-technologies-inc:
     - ticket-airline
     - tickets-airline
     - tower-control
-    - user-pilot
-    - user-pilot-tie
+    - users-pilot
+    - users-pilot-tie
   label: Preflight Technologies Incorporated
   url: 'http://www.preflighttech.com'
 promo-wizard:
@@ -987,8 +987,8 @@ supple:
     - square-poll-horizontal
     - square-poll-vertical
     - supple
-    - user-crown
-    - user-group-crown
+    - users-crown
+    - users-group-crown
   label: Supple
   url: 'https://supple.com.au'
 the-red-yeti:
@@ -1092,7 +1092,7 @@ un-ocha:
     - building-ngo
     - building-shield
     - building-un
-    - building-user
+    - building-users
     - building-wheat
     - burst
     - car-on
@@ -1342,7 +1342,7 @@ via:
     - layer-minus
     - layer-plus
     - skull-crossbones
-    - user-injured
+    - users-injured
   label: VIA Traffic Software Solutions
   url: 'https://www.via.software'
 victor-costan:

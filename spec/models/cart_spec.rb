@@ -5,7 +5,7 @@ RSpec.describe Cart, type: :model do
     let(:user) { create(:user) }
     let(:product) { create(:product) }
 
-    context 'when the cart exists for the user and product' do
+    context 'when the cart exists for the users and product' do
       it 'increments the quantity of the existing cart' do
         existing_cart = create(:cart, user_id: user.id, product_id: product.id, quantity: 2)
         expect do
@@ -15,7 +15,7 @@ RSpec.describe Cart, type: :model do
       end
     end
 
-    context 'when the cart does not exist for the user and product' do
+    context 'when the cart does not exist for the users and product' do
       it 'creates a new cart with quantity set to 1' do
         expect do
           described_class.current_user_cart(user.id, product.id)
@@ -35,15 +35,15 @@ RSpec.describe Cart, type: :model do
     let(:user) { create(:user) }
     let(:product) { create(:product) }
 
-    context 'when the user has carts' do
-      it 'returns the count of carts for the user' do
+    context 'when the users has carts' do
+      it 'returns the count of carts for the users' do
         create_list(:cart, 3, user_id: user.id, product_id: product.id)
         cart_count = described_class.cart_counter(user.id)
         expect(cart_count).to eq(3)
       end
     end
 
-    context 'when the user has no carts' do
+    context 'when the users has no carts' do
       it 'returns 0' do
         cart_count = described_class.cart_counter(user.id)
         expect(cart_count).to eq(0)

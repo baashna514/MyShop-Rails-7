@@ -1,8 +1,9 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
+  protect_from_forgery with: :exception, prepend: true
   before_action :require_user_authentication, only: [:logout, :profile, :edit_profile, :update_profile]
 
   def user_login
-    render 'user/login'
+    render 'users/login'
   end
 
   def check_credentials
@@ -32,12 +33,12 @@ class UserController < ApplicationController
   def profile
     @user = current_user
     @orders = @user.orders.includes(order_items: [:product])
-    render 'user/profile'
+    render 'users/profile'
   end
 
   def edit_profile
     @user = User.get_user_from_session(session)
-    render 'user/edit'
+    render 'users/edit'
   end
 
   def update_profile
@@ -53,7 +54,7 @@ class UserController < ApplicationController
 
   def sign_up_form
     @user = User.new
-    render 'user/signup'
+    render 'users/signup'
   end
 
   def create_user
@@ -71,7 +72,7 @@ class UserController < ApplicationController
 
   # Password Reset Functions
   def new_password_reset
-    render 'user/reset/new'
+    render 'users/reset/new'
   end
 
   def create_password_reset
@@ -94,7 +95,7 @@ class UserController < ApplicationController
       redirect_to new_password_reset_path
       return
     end
-    render 'user/reset/edit_password_reset'
+    render 'users/reset/edit_password_reset'
   end
 
   def update_password_reset
@@ -104,7 +105,7 @@ class UserController < ApplicationController
       redirect_to login_path
     else
       flash[:error] = "Invalid or expired password reset request."
-      render 'user/reset/edit_password_reset'
+      render 'users/reset/edit_password_reset'
     end
   end
 

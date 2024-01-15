@@ -6,16 +6,16 @@ RSpec.describe UserController, type: :controller do
     it 'should return 200 response' do
       get :user_login
       expect(response).to have_http_status(200)
-      expect(response).to render_template('user/login')
+      expect(response).to render_template('users/login')
     end
   end
 
 
   describe 'POST #check_credentials' do
-    let(:valid_user) { create(:user, email: 'user@example.com', password: 'password') }
+    let(:valid_user) { create(:user, email: 'users@example.com', password: 'password') }
 
     context 'with valid credentials' do
-      it 'should logs in the user and redirects to root_path' do
+      it 'should logs in the users and redirects to root_path' do
         post :check_credentials, params: { email: valid_user.email, password: 'password' }
 
         expect(session[:user_id]).to eq(valid_user.id)
@@ -23,7 +23,7 @@ RSpec.describe UserController, type: :controller do
         expect(flash[:success]).to be_present
       end
 
-      it 'should logs admin user in and redirects to admin_dashboard_path' do
+      it 'should logs admin users in and redirects to admin_dashboard_path' do
         valid_user.update(admin: true)
 
         post :check_credentials, params: { email: valid_user.email, password: 'password' }
@@ -48,7 +48,7 @@ RSpec.describe UserController, type: :controller do
 
 
   describe 'GET #logout' do
-    context 'when user is logged in' do
+    context 'when users is logged in' do
       let(:user) { create(:user) }
       before do
         session[:user_id] = user.id
@@ -59,7 +59,7 @@ RSpec.describe UserController, type: :controller do
         get :logout
       end
 
-      it 'should logs out the user and redirects to root_path' do
+      it 'should logs out the users and redirects to root_path' do
         get :logout
         expect(session[:user_id]).to be_nil
         expect(response).to redirect_to(root_path)
@@ -71,7 +71,7 @@ RSpec.describe UserController, type: :controller do
 
 
   describe 'GET #profile' do
-    context 'when user is logged in' do
+    context 'when users is logged in' do
       let(:user) { create(:user) }
       let(:orders) { create_list(:order, 3, user: user) }
 
@@ -79,15 +79,15 @@ RSpec.describe UserController, type: :controller do
         session[:user_id] = user.id
       end
 
-      it 'should should assigns the user and their orders and renders the profile template' do
+      it 'should should assigns the users and their orders and renders the profile template' do
         get :profile
         expect(assigns(:user)).to eq(user)
         expect(assigns(:orders)).to eq(orders)
-        expect(response).to render_template('user/profile')
+        expect(response).to render_template('users/profile')
       end
     end
 
-    context 'when user is not logged in' do
+    context 'when users is not logged in' do
       it 'should redirects to login_path with an error message' do
         get :profile
         expect(response).to redirect_to(login_path)
@@ -101,21 +101,21 @@ RSpec.describe UserController, type: :controller do
 
 
   describe 'GET #edit_profile' do
-    context 'when user is logged in' do
+    context 'when users is logged in' do
       let(:user) { create(:user) }
 
       before do
         session[:user_id] = user.id
       end
 
-      it 'should assigns the user and renders the edit template' do
+      it 'should assigns the users and renders the edit template' do
         get :edit_profile
         expect(assigns(:user)).to eq(user)
-        expect(response).to render_template('user/edit')
+        expect(response).to render_template('users/edit')
       end
     end
 
-    context 'when user is not logged in' do
+    context 'when users is not logged in' do
       it 'should redirects to login_path with an error message' do
         get :edit_profile
         expect(response).to redirect_to(login_path)
@@ -127,7 +127,7 @@ RSpec.describe UserController, type: :controller do
 
 
   describe 'PATCH #update_profile' do
-    context 'when user is logged in' do
+    context 'when users is logged in' do
       let(:user) { create(:user) }
 
       before do
@@ -135,7 +135,7 @@ RSpec.describe UserController, type: :controller do
       end
 
       context 'with valid parameters' do
-        it 'should updates the user profile and redirects to user_profile_path' do
+        it 'should updates the users profile and redirects to user_profile_path' do
           post :update_profile, params: { id: user.id, user: { name: 'Updated Name' } }
           user.reload
           expect(user.name).to eq('Updated Name')
@@ -145,7 +145,7 @@ RSpec.describe UserController, type: :controller do
       end
 
       context 'with invalid parameters' do
-        it 'does not update the user profile and redirects to edit_profile_path' do
+        it 'does not update the users profile and redirects to edit_profile_path' do
           post :update_profile, params: { id: user.id, user: { email: 'invalid_email' } }
           expect(response).to redirect_to(edit_profile_path)
           expect(flash[:error]).to be_present
@@ -153,7 +153,7 @@ RSpec.describe UserController, type: :controller do
       end
     end
 
-    context 'when user is not logged in' do
+    context 'when users is not logged in' do
       it 'should redirects to login_path with an error message' do
         post :update_profile, params: { id: 1, user: { name: 'Updated Name' } }
         expect(response).to redirect_to(login_path)
@@ -164,9 +164,9 @@ RSpec.describe UserController, type: :controller do
 
 
   describe 'GET #sign_up_form' do
-    it 'should renders the sign up form template and assigns a new user' do
+    it 'should renders the sign up form template and assigns a new users' do
       get :sign_up_form
-      expect(response).to render_template('user/signup')
+      expect(response).to render_template('users/signup')
       expect(assigns(:user)).to be_a_new(User)
     end
   end
@@ -178,7 +178,7 @@ RSpec.describe UserController, type: :controller do
     let(:valid_user_params) { attributes_for(:user) }
 
     context 'with valid parameters' do
-      it 'should creates a new user, sends a welcome email, and redirects to login_path' do
+      it 'should creates a new users, sends a welcome email, and redirects to login_path' do
         expect do
           post :create_user, params: { user: valid_user_params }
         end.to change(User, :count).by(1)
@@ -192,7 +192,7 @@ RSpec.describe UserController, type: :controller do
     end
 
     context 'with invalid parameters' do
-      it 'does not should create a new user and redirects to sign_up_path with an error message' do
+      it 'does not should create a new users and redirects to sign_up_path with an error message' do
         invalid_user_params = { email: 'invalid_email' }
 
         expect do
@@ -209,7 +209,7 @@ RSpec.describe UserController, type: :controller do
   describe 'GET #new_password_reset' do
     it 'should renders the password reset form template' do
       get :new_password_reset
-      expect(response).to render_template('user/reset/new')
+      expect(response).to render_template('users/reset/new')
     end
   end
 
@@ -252,10 +252,10 @@ RSpec.describe UserController, type: :controller do
     let(:expired_user) { create(:user, reset_password_token: SecureRandom.urlsafe_base64, reset_password_sent_at: 2.days.ago) }
 
     context 'with valid token and not expired' do
-      it 'should assigns the user and renders the edit_password_reset template' do
+      it 'should assigns the users and renders the edit_password_reset template' do
         get :edit_password_reset, params: { token: user.reset_password_token }
         expect(assigns(:user)).to eq(user)
-        expect(response).to render_template('user/reset/edit_password_reset')
+        expect(response).to render_template('users/reset/edit_password_reset')
       end
     end
 
@@ -264,7 +264,7 @@ RSpec.describe UserController, type: :controller do
         get :edit_password_reset, params: { token: expired_user.reset_password_token }
         expect(response).to redirect_to(new_password_reset_path)
         expect(flash[:error]).to be_present
-        expect(response).not_to render_template('user/reset/edit_password_reset')
+        expect(response).not_to render_template('users/reset/edit_password_reset')
       end
     end
 
@@ -284,7 +284,7 @@ RSpec.describe UserController, type: :controller do
     let(:expired_user) { create(:user, reset_password_token: SecureRandom.urlsafe_base64, reset_password_sent_at: 2.days.ago) }
 
     context 'with valid token and not expired' do
-      it 'should updates the user password and redirects to login_path' do
+      it 'should updates the users password and redirects to login_path' do
         new_password = 'new_password'
         patch :update_password_reset, params: { token: user.reset_password_token, user: { password: new_password } }
         user.reload

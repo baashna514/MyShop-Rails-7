@@ -6,30 +6,30 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   root "product#index"
   get '/product-detail/:product_name', to: 'product#productDetail', as: 'product_detail'
 
   get '/category/:category_name/products/', to: 'product#categoryProducts', as: 'category_products'
 
-  devise_for :users
+  # get '/login', to: 'users#user_login', as: 'login'
+  # post "/login" => "users#check_credentials", as: :check_credentials
+  # get "/logout" => "users#logout", as: :logout
 
-  # get '/login', to: 'user#user_login', as: 'login'
-  # post "/login" => "user#check_credentials", as: :check_credentials
-  # get "/logout" => "user#logout", as: :logout
-
-  get '/my-profile', to: 'user#profile', as: 'user_profile'
-  get '/edit-profile', to: 'user#edit_profile', as: 'edit_profile'
-  post '/update-profile/:id', to: 'user#update_profile', as: 'update_profile'
+  get '/my-profile', to: 'users#profile', as: 'user_profile'
+  get '/edit-profile', to: 'users#edit_profile', as: 'edit_profile'
+  post '/update-profile/:id', to: 'users#update_profile', as: 'update_profile'
 
 
-  get '/reset_password', to: 'user#new_password_reset', as: 'new_password_reset'
-  post '/reset-password-action', to: 'user#create_password_reset', as: 'password_reset'
-  get '/reset_password/:token/edit', to: 'user#edit_password_reset', as: :edit_password_reset
-  patch '/reset_password/:token', to: 'user#update_password_reset', as: :reset_password
+  get '/reset_password', to: 'users#new_password_reset', as: 'new_password_reset'
+  post '/reset-password-action', to: 'users#create_password_reset', as: 'password_reset'
+  get '/reset_password/:token/edit', to: 'users#edit_password_reset', as: :edit_password_reset
+  patch '/reset_password/:token', to: 'users#update_password_reset', as: :reset_password
 
 
-  get '/sign-up', to: 'user#sign_up_form', as: 'sign_up'
-  post '/create-user', to: 'user#create_user', as: 'create_user'
+  get '/sign-up', to: 'users#sign_up_form', as: 'sign_up'
+  post '/create-users', to: 'users#create_user', as: 'create_user'
 
   get '/cart', to: 'cart#index', as: 'my_cart'
   post '/add_to_cart/:id', to: 'cart#add_to_cart', as: 'add_to_cart'

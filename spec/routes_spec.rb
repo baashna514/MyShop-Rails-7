@@ -14,55 +14,55 @@ RSpec.describe "Routes", type: :routing do
   end
 
   context "User Authentication" do
-    it "routes GET /login to user#user_login" do
-      expect(get: "/login").to route_to("user#user_login")
+    it "routes GET /login to users#user_login" do
+      expect(get: "/login").to route_to("users#user_login")
     end
 
-    it "routes POST /login to user#check_credentials" do
-      expect(post: "/login").to route_to("user#check_credentials")
+    it "routes POST /login to users#check_credentials" do
+      expect(post: "/login").to route_to("users#check_credentials")
     end
 
-    it "routes GET /logout to user#logout" do
-      expect(get: "/logout").to route_to("user#logout")
+    it "routes GET /logout to users#logout" do
+      expect(get: "/logout").to route_to("users#logout")
     end
 
-    it "routes GET /my-profile to user#profile" do
-      expect(get: "/my-profile").to route_to("user#profile")
+    it "routes GET /my-profile to users#profile" do
+      expect(get: "/my-profile").to route_to("users#profile")
     end
 
-    it "routes GET /edit-profile to user#edit_profile" do
-      expect(get: "/edit-profile").to route_to("user#edit_profile")
+    it "routes GET /edit-profile to users#edit_profile" do
+      expect(get: "/edit-profile").to route_to("users#edit_profile")
     end
 
-    it "routes POST /update-profile/:id to user#update_profile" do
+    it "routes POST /update-profile/:id to users#update_profile" do
       user = create(:user)
-      expect(post: "/update-profile/#{user.id}").to route_to("user#update_profile", id: user.id.to_s)
+      expect(post: "/update-profile/#{user.id}").to route_to("users#update_profile", id: user.id.to_s)
     end
 
-    it "routes GET /reset_password to user#new_password_reset" do
-      expect(get: "/reset_password").to route_to("user#new_password_reset")
+    it "routes GET /reset_password to users#new_password_reset" do
+      expect(get: "/reset_password").to route_to("users#new_password_reset")
     end
 
-    it "routes POST /reset-password-action to user#create_password_reset" do
-      expect(post: "/reset-password-action").to route_to("user#create_password_reset")
+    it "routes POST /reset-password-action to users#create_password_reset" do
+      expect(post: "/reset-password-action").to route_to("users#create_password_reset")
     end
 
-    it "routes GET /reset_password/:token/edit to user#edit_password_reset" do
+    it "routes GET /reset_password/:token/edit to users#edit_password_reset" do
       user = create(:user, reset_password_token: SecureRandom.urlsafe_base64, reset_password_sent_at: Time.zone.now)
-      expect(get: "/reset_password/#{user.reset_password_token}/edit").to route_to("user#edit_password_reset", token: user.reset_password_token)
+      expect(get: "/reset_password/#{user.reset_password_token}/edit").to route_to("users#edit_password_reset", token: user.reset_password_token)
     end
 
-    it "routes PATCH /reset_password/:token to user#update_password_reset" do
+    it "routes PATCH /reset_password/:token to users#update_password_reset" do
       user = create(:user, reset_password_token: SecureRandom.urlsafe_base64, reset_password_sent_at: Time.zone.now)
-      expect(patch: "/reset_password/#{user.reset_password_token}").to route_to("user#update_password_reset", token: user.reset_password_token)
+      expect(patch: "/reset_password/#{user.reset_password_token}").to route_to("users#update_password_reset", token: user.reset_password_token)
     end
 
-    it "routes GET /sign-up to user#sign_up_form" do
-      expect(get: "/sign-up").to route_to("user#sign_up_form")
+    it "routes GET /sign-up to users#sign_up_form" do
+      expect(get: "/sign-up").to route_to("users#sign_up_form")
     end
 
-    it "routes POST /create-user to user#create_user" do
-      expect(post: "/create-user").to route_to("user#create_user")
+    it "routes POST /create-users to users#create_user" do
+      expect(post: "/create-users").to route_to("users#create_user")
     end
 
   end
