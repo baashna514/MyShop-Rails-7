@@ -29,7 +29,8 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
   # config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET']
 
-  config.omniauth :google_oauth2, '1083579191457-2m3ni8jk75heoute3q1ag4304iqsdcq6.apps.googleusercontent.com', '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', { access_type: 'offline', approval_prompt: '' }
+  config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET'], { access_type: 'offline', approval_prompt: '' }
+  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], token_params: { parse: :json }
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

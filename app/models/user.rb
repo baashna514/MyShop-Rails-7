@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-          :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   has_many :carts
   has_many :orders
@@ -18,7 +18,6 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    debugger
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]

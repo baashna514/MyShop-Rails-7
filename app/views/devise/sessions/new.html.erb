@@ -58,9 +58,14 @@
         </div>
         <div class="text-center">
           <%= button_to user_google_oauth2_omniauth_authorize_path, method: :post, remote: true, data: { turbo: "false" } do %>
-            <%= image_tag 'https://onymos.com/wp-content/uploads/2020/10/google-signin-button.png', alt: 'Login with Google', class: 'google-signin-button',style: 'width:300px;' %>
+            <%= image_tag 'https://onymos.com/wp-content/uploads/2020/10/google-signin-button.png', alt: 'Login with Google', style: 'width:300px;' %>
           <% end %>
-          <%#= button_to 'Login with Google', user_google_oauth2_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "btn btn-primary btn-sm", html: { class: "fa-brands fa-google", 'aria-hidden' => true } %>
+
+          <span class="my-3">or</span>
+          <%= button_to user_facebook_omniauth_authorize_path, method: :post, remote: true, data: { turbo: "false" } do %>
+            <%= image_tag 'https://i.stack.imgur.com/oL5c2.png', alt: 'Login with Google', style: 'width:300px;' %>
+          <% end %>
+          <%#= button_to "Continue with Facebook", user_facebook_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "btn btn-primary btn-sm", html: { class: "fa-brands fa-google", 'aria-hidden' => true } %>
         </div>
       </div>
     </div>
