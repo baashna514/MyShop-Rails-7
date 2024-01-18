@@ -30,8 +30,8 @@ Devise.setup do |config|
   # config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET']
 
   config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET'], { access_type: 'offline', approval_prompt: '' }
-  config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET'], token_params: { parse: :json }
-
+  config.omniauth :facebook, '7541062649238813', '743103b2a91f5a2f0a68beb47a4627a0', scope: 'email,user_posts'
+  config.omniauth :github, ENV['GITHUB_ID'], ENV['GITHUB_SECRET'], scope: 'user:email'
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
 

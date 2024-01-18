@@ -5,6 +5,7 @@ Rails.application.configure do
 
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.hosts << "f3e1-2400-adc5-422-b200-36a1-bc51-52a7-52ca.ngrok-free.app"
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

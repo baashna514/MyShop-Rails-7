@@ -65,6 +65,11 @@
           <%= button_to user_facebook_omniauth_authorize_path, method: :post, remote: true, data: { turbo: "false" } do %>
             <%= image_tag 'https://i.stack.imgur.com/oL5c2.png', alt: 'Login with Google', style: 'width:300px;' %>
           <% end %>
+
+          <span class="my-3">or</span>
+          <%= button_to user_github_omniauth_authorize_path, method: :post, remote: true, data: { turbo: "false" } do %>
+            <%= image_tag 'https://user-images.githubusercontent.com/9599/61177475-2ddce800-a58b-11e9-9bf6-aa4794a99f2a.png', alt: 'Login with Google', style: 'width:300px;' %>
+          <% end %>
           <%#= button_to "Continue with Facebook", user_facebook_omniauth_authorize_path, method: :post, data: { turbo: "false" }, class: "btn btn-primary btn-sm", html: { class: "fa-brands fa-google", 'aria-hidden' => true } %>
         </div>
       </div>

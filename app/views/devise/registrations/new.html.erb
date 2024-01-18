@@ -28,7 +28,7 @@
           <% end %>
           <h2 class="fw-bold mb-5 text-center">Sign up now</h2>
           <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form| %>
-            <%= render 'user/form', form: form %>
+            <%= render 'users/form', form: form %>
             <%= form.button 'Sign up', class: 'btn btn-primary mb-4', type: 'submit' %>
             <span class="float-right">Already have an Account? <a href="<%= new_user_session_path %>" class="text-primary">Sign in</a> Now</span>
           <% end %>
