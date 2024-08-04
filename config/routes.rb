@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   # post "/login" => "users#check_credentials", as: :check_credentials
   # get "/logout" => "users#logout", as: :logout
 
+  get '/about_us', to: 'home#about', as: 'about_us'
+  get '/contact_us', to: 'home#contact', as: 'contact_us'
+
   get '/my-profile', to: 'users#profile', as: 'user_profile'
   get '/edit-profile', to: 'users#edit_profile', as: 'edit_profile'
   post '/update-profile/:id', to: 'users#update_profile', as: 'update_profile'
